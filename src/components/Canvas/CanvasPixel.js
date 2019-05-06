@@ -11,7 +11,7 @@ type Props = {
 type State = {
 };
 
-const SIZE = 16;
+const SIZE = 12;
 
 class CanvasPixel extends React.Component<Props, State> {
 

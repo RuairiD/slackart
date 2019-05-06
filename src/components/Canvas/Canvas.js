@@ -86,7 +86,7 @@ class Canvas extends React.Component<Props, State> {
 
     render() {
         return (
-            <Container>
+            <Container style={{ padding: '1em', 'textAlign': 'left' }}>
                 <CanvasControls
                     onResize={this.onResize}
                     onClear={this.clearImage}
@@ -100,6 +100,7 @@ class Canvas extends React.Component<Props, State> {
                     }}
                     onMouseDown={this.onMouseDown}
                     onMouseUp={this.onMouseUp}
+                    onMouseLeave={this.onMouseUp}
                 >
                     {this.image.map((column, x) => (
                         <div key={x} style={{ display: 'inline-block' }}>

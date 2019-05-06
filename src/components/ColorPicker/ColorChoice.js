@@ -30,12 +30,12 @@ class ColorChoice extends React.Component<Props, State> {
 
     render() {
         return (
-            <Container>
+            <Container style={{ padding: '0.25em' }}>
                 <Row>
                     <Col md="auto">
-                        <Form.Control defaultValue={this.props.emoji} onChange={this.onChange} />
+                        <Form.Control value={this.props.emoji} onChange={this.onChange} style={{ width: '6em' }} />
                     </Col>
-                    <Col md="auto">
+                    <Col xs>
                         <div
                             style={{
                                 background: this.props.displayColor,

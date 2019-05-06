@@ -38,6 +38,10 @@ const DEFAULT_PALLETTE = [
         emoji: 'blue',
     },
     {
+        color: '#00FFFF',
+        emoji: 'cyan',
+    },
+    {
         color: '#00DD00',
         emoji: 'green',
     },
@@ -90,21 +94,23 @@ class Studio extends React.Component<Props, State> {
                 </Navbar>
                 <Container>
                     <Row>
-                        <Col>
+                        <Col xs={3} md={3}>
                             <ColorPicker
                                 pallette={this.state.pallette}
                                 onChange={this.updateBrushColor}
                                 onEmojiChange={this.updateColorEmoji}
                             />
                         </Col>
-                        <Col>
+                        <Col auto>
                             <Canvas
                                 pallette={this.state.pallette}
                                 brushColor={this.state.brushColor}
                                 onChange={this.updateEmojiText}
                             />
                         </Col>
-                        <Col xs={6} md={4}>
+                    </Row>
+                    <Row>
+                        <Col auto>
                             <EmojiText
                                 pallette={this.state.pallette}
                                 image={this.state.image}

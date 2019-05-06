@@ -23,14 +23,22 @@ class CanvasControls extends React.Component<Props, State> {
     };
 
     updateWidth = (event) => {
+        let width = event.target.value;
+        if (width > 64) {
+            width = 64;
+        }
         this.setState({
-            width: event.target.value,
+            width: width,
         });
     };
 
     updateHeight = (event) => {
+        let height = event.target.value;
+        if (height > 64) {
+            height = 64;
+        }
         this.setState({
-            height: event.target.value,
+            height: height,
         });
     };
 
@@ -40,32 +48,32 @@ class CanvasControls extends React.Component<Props, State> {
 
     render() {
         return (
-            <Container>
+            <Container style={{ padding: '1em' }}>
                 <Row>
                     <Form inline>
                         <Col>
-                            <Form.Control defaultValue={this.state.width} onChange={this.updateWidth} />
+                            <Form.Control value={this.state.width} onChange={this.updateWidth} style={{ width: '3em' }} />
                         </Col>
                         <Col>
-                        x
+                            x
                         </Col>
                         <Col>
-                        <Form.Control defaultValue={this.state.height} onChange={this.updateHeight} />
+                            <Form.Control value={this.state.height} onChange={this.updateHeight} style={{ width: '3em' }} />
                         </Col>
                         <Col>
-                        <Button variant="primary" onClick={this.onResize}>
-                            Resize
-                        </Button>
+                            <Button variant="primary" onClick={this.onResize}>
+                                Resize
+                            </Button>
                         </Col>
                     </Form>
-                        <Col>
-                    <Button
-                        variant="danger"
-                        onClick={this.props.onClear}
-                    >
-                        Clear Canvas
-                    </Button>
-                        </Col>
+                    <Col>
+                        <Button
+                            variant="danger"
+                            onClick={this.props.onClear}
+                        >
+                            Clear Canvas
+                        </Button>
+                    </Col>
                 </Row>
             </Container>
         );
