@@ -3,19 +3,20 @@ import React from 'react';
 type Props = {
     x: number,
     y: number,
-    selectedColor: string,
+    pallette: Array<number>,
+    selectedColor: number,
     onClick: any,
 };
 
 type State = {
-    color: string,
-}
+    color: number,
+};
 
 const SIZE = 16;
 
 class CanvasPixel extends React.Component<Props, State> {
     state = {
-        color: '#FF0000',
+        color: 0,
     }
 
     onClick = () => {
@@ -29,7 +30,7 @@ class CanvasPixel extends React.Component<Props, State> {
         return (
             <div
                 style={{
-                    background: this.state.color,
+                    background: this.props.pallette[this.state.color],
                     width: SIZE,
                     height: SIZE,
                 }}

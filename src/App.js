@@ -8,7 +8,7 @@ import Canvas from './components/Canvas/Canvas';
 function App() {
   return (
     <div className="App">
-      <Canvas />
+      <Canvas width={16} height={16} pallette={['#FF0000', '#0000FF']}/>
     </div>
   );
 }
