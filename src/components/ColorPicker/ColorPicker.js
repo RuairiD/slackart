@@ -18,7 +18,7 @@ type State = {
 
 class ColorPicker extends React.Component<Props, State> {
     state = {
-        selectedColor: 1,
+        selectedColor: 0,
     };
 
     onChange = (value) => {
@@ -37,6 +37,7 @@ class ColorPicker extends React.Component<Props, State> {
                             (colorData, i) => (
                                 <ColorChoice
                                     key={i}
+                                    isSelected={i === this.state.selectedColor}
                                     color={i}
                                     displayColor={colorData.color}
                                     emoji={colorData.emoji}

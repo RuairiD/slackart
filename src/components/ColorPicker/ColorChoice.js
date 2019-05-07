@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
 type Props = {
+    isSelected: boolean,
     color: number,
     displayColor: string,
     emoji: string,
@@ -29,8 +30,15 @@ class ColorChoice extends React.Component<Props, State> {
     };
 
     render() {
+        let containerStyle = { padding: '0.25em' };
+        if (this.props.isSelected) {
+            Object.assign(containerStyle, {
+                borderStyle: 'dotted',
+                borderColor: '#000000',
+            })
+        }
         return (
-            <Container style={{ padding: '0.25em' }}>
+            <Container style={containerStyle}>
                 <Row>
                     <Col md="auto">
                         <Form.Control value={this.props.emoji} onChange={this.onChange} style={{ width: '6em' }} />

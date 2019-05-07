@@ -6,12 +6,13 @@ type Props = {
     pallette: Array<Object>,
     color: number,
     onClick: any,
+    showPixelGrid: boolean,
 };
 
 type State = {
 };
 
-const SIZE = 12;
+const SIZE = 16;
 
 class CanvasPixel extends React.Component<Props, State> {
 
@@ -20,13 +21,23 @@ class CanvasPixel extends React.Component<Props, State> {
     };
 
     render() {
+        let pixelStyle = {
+            background: this.props.pallette[this.props.color].color,
+            width: SIZE,
+            height: SIZE,
+        };
+
+        if (this.props.showPixelGrid) {
+            Object.assign(pixelStyle, {
+                borderStyle: 'dashed',
+                borderColor: '#00000066',
+                borderWidth: '1px',
+            })
+        }
+
         return (
             <div
-                style={{
-                    background: this.props.pallette[this.props.color].color,
-                    width: SIZE,
-                    height: SIZE,
-                }}
+                style={pixelStyle}
                 onMouseOver={this.onClick}
                 onMouseMove={this.onClick}
                 onClick={this.onClick}

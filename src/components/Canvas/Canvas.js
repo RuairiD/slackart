@@ -9,6 +9,7 @@ type Props = {
     pallette: Array<Object>,
     brushColor: number,
     onChange: (image: Array<Array<number>>) => void,
+    showPixelGrid: boolean,
 };
 
 type State = {
@@ -96,7 +97,7 @@ class Canvas extends React.Component<Props, State> {
                         display: 'inline-block',
                         borderStyle: 'solid',
                         borderColor: '#000000',
-                        backgroundColor: '#EEEEEE'
+                        backgroundColor: '#EEEEEE',
                     }}
                     onMouseDown={this.onMouseDown}
                     onMouseUp={this.onMouseUp}
@@ -112,6 +113,7 @@ class Canvas extends React.Component<Props, State> {
                                     pallette={this.props.pallette}
                                     color={color}
                                     onClick={this.onPixelClick}
+                                    showPixelGrid={this.props.showPixelGrid}
                                 />
                             ))}
                         </div>

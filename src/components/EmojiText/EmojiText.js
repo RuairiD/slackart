@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form';
 type Props = {
     image: Array<Array<number>>,
     pallette: Array<Object>,
+    /* Append :empty: emojis to the right of each line if true. */
+    rightPad: boolean,
 };
 
 type State = {
@@ -18,11 +20,23 @@ class EmojiText extends React.Component<Props, State> {
             return text;
         }
         for (var x = 0; x < image[0].length; x++) {
+            let textBuffer = '';
             for (var y = 0; y < image.length; y++) {
-                text = text + ':' + this.props.pallette[image[y][x]].emoji + ':';
+                // Maintain buffer of empty emojis; only flush them to text if we
+                // encounter another non-empty emoji, indicating they aren't the
+                // last emojis of the line (unless rightPad is true).
+                if (!this.props.rightPad && image[y][x] === 0) {
+                    textBuffer = textBuffer + this.props.pallette[image[y][x]].emoji
+                } else {
+                    text = text + textBuffer + this.props.pallette[image[y][x]].emoji;
+                    textBuffer = '';
+                }
             }
             text = text + '\n';
         }
+
+
+
         return text;
     };
 
