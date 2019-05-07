@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 type Props = {
+    initialWidth: number,
+    initialHeight: number,
     onResize: (width: number, height: number) => void,
     onClear: () => void,
 };
@@ -17,15 +19,20 @@ type State = {
 };
 
 class CanvasControls extends React.Component<Props, State> {
-    state = {
-        width: 16,
-        height: 16,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            width: this.props.initialWidth,
+            height: this.props.initialHeight,
+        }
+    }
 
     updateWidth = (event) => {
         let width = event.target.value;
         if (width > 64) {
             width = 64;
+        } else if (width < 1) {
+            width = 1;
         }
         this.setState({
             width: width,
@@ -36,6 +43,8 @@ class CanvasControls extends React.Component<Props, State> {
         let height = event.target.value;
         if (height > 64) {
             height = 64;
+        } else if (height < 1) {
+            height = 1;
         }
         this.setState({
             height: height,

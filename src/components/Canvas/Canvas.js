@@ -14,30 +14,27 @@ type Props = {
 };
 
 type State = {
-    width: number,
-    height: number,
-    newWidth: number,
-    newHeight: number,
     brushDown: boolean,
+    // TODO: this is a hack used exclusively to force a re-render on onResize. I'm bad at React.
+    updates: number,
 };
 
 class Canvas extends React.Component<Props, State> {
     state = {
-        width: 16,
-        height: 16,
         brushDown: false,
+        updates: 0,
     }
 
     constructor(props, state) {
         super(props, state);
-        this.image = this.props.initialImage || this.buildImage()
+        this.image = this.props.initialImage || this.buildImage(16, 16)
     }
 
-    buildImage = () => {
+    buildImage = (width, height) => {
         let newImage = [];
-        for(var x = 0; x < this.state.width; x++) {
+        for(var x = 0; x < width; x++) {
             newImage[x] = [];
-            for(var y = 0; y < this.state.height; y++) {
+            for(var y = 0; y < height; y++) {
                 let color = 0;
                 if (this.image && this.image.length > x && this.image[x].length > y) {
                     color = this.image[x][y];
@@ -50,8 +47,8 @@ class Canvas extends React.Component<Props, State> {
     };
 
     clearImage = () => {
-        for(var x = 0; x < this.state.width; x++) {
-            for(var y = 0; y < this.state.height; y++) {
+        for(var x = 0; x < this.image.length; x++) {
+            for(var y = 0; y < this.image[x].length; y++) {
                 this.image[x][y] = 0;
             }
         }
@@ -78,18 +75,19 @@ class Canvas extends React.Component<Props, State> {
     };
 
     onResize = (width, height) => {
-        this.setState({
-            width: width,
-            height: height,
-        });
-        this.image = this.buildImage();
+        this.image = this.buildImage(width, height);
         this.props.onChange(this.image);
+        this.setState({
+            updates: this.state.updates + 1,
+        })
     };
 
     render() {
         return (
             <Container style={{ padding: '1em', 'textAlign': 'left' }}>
                 <CanvasControls
+                    initialWidth={this.image.length}
+                    initialHeight={this.image[0].length}
                     onResize={this.onResize}
                     onClear={this.clearImage}
                 />
