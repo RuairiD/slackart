@@ -16,7 +16,7 @@ type State = {
 class EmojiText extends React.Component<Props, State> {
     toEmojiText = (image) => {
         let text = ':empty:\n';
-        if (image.length === 0) { 
+        if (!image || image.length === 0) { 
             return text;
         }
         for (var x = 0; x < image[0].length; x++) {

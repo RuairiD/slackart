@@ -6,6 +6,7 @@ import CanvasControls from './CanvasControls';
 import CanvasPixel from './CanvasPixel';
 
 type Props = {
+    initialImage: Array<Array<number>>,
     pallette: Array<Object>,
     brushColor: number,
     onChange: (image: Array<Array<number>>) => void,
@@ -29,7 +30,7 @@ class Canvas extends React.Component<Props, State> {
 
     constructor(props, state) {
         super(props, state);
-        this.image = this.buildImage()
+        this.image = this.props.initialImage || this.buildImage()
     }
 
     buildImage = () => {

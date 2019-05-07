@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Navbar from 'react-bootstrap/Navbar';
+import Form from 'react-bootstrap/Form';
 
 import Settings from './Settings';
 import Canvas from '../Canvas/Canvas';
@@ -11,6 +12,7 @@ import ColorPicker from '../ColorPicker/ColorPicker';
 import EmojiText from '../EmojiText/EmojiText';
 
 type Props = {
+    savedEncImage: string,
 };
 
 type State = {
@@ -65,8 +67,19 @@ const DEFAULT_PALLETTE = [
 ];
 
 class Studio extends React.Component<Props, State> {
+    encodeImage = (image) => {
+        return Buffer.from(JSON.stringify(image)).toString('base64');
+    };
+
+    decodeImage = (encImage) => {
+        if (!encImage) {
+            return null;
+        }
+        return JSON.parse(Buffer.from(encImage, 'base64').toString('ascii'));
+    };
+
     state = {
-        image: [],
+        image: this.decodeImage(this.props.savedEncImage),
         pallette: DEFAULT_PALLETTE,
         brushColor: 0,
         rightPad: false,
@@ -105,6 +118,10 @@ class Studio extends React.Component<Props, State> {
         });
     };
 
+    buildShareableUrl = () => {
+        return window.location.origin + '/?image=' + this.encodeImage(this.state.image);
+    };
+
     render() {
         return (
             <React.Fragment>
@@ -128,6 +145,7 @@ class Studio extends React.Component<Props, State> {
                         </Col>
                         <Col>
                             <Canvas
+                                initialImage={this.state.image}
                                 pallette={this.state.pallette}
                                 brushColor={this.state.brushColor}
                                 onChange={this.updateEmojiText}
@@ -137,6 +155,12 @@ class Studio extends React.Component<Props, State> {
                     </Row>
                     <Row>
                         <Col>
+                            <Container style={{ padding: '0.5em' }}>
+                                <Form.Control
+                                    value={this.buildShareableUrl()}
+                                    readOnly
+                                />
+                            </Container>
                             <EmojiText
                                 pallette={this.state.pallette}
                                 image={this.state.image}
