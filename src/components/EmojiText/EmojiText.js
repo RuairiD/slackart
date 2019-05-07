@@ -21,6 +21,7 @@ class EmojiText extends React.Component<Props, State> {
         }
         for (var x = 0; x < image[0].length; x++) {
             let textBuffer = '';
+            let emptyLine = true;
             for (var y = 0; y < image.length; y++) {
                 // Maintain buffer of empty emojis; only flush them to text if we
                 // encounter another non-empty emoji, indicating they aren't the
@@ -30,12 +31,16 @@ class EmojiText extends React.Component<Props, State> {
                 } else {
                     text = text + textBuffer + this.props.pallette[image[y][x]].emoji;
                     textBuffer = '';
+                    emptyLine = false;
                 }
+            }
+            // Empty lines should consist of a single :empty: emoji; slack will not reproduce
+            // empty lines at full height.
+            if (emptyLine) {
+                text = text + this.props.pallette[0].emoji
             }
             text = text + '\n';
         }
-
-
 
         return text;
     };
