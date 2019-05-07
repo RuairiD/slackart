@@ -128,7 +128,7 @@ class Studio extends React.Component<Props, State> {
                 <Navbar bg="light" expand="lg">
                     <Navbar.Brand>Slackart</Navbar.Brand>
                 </Navbar>
-                <Container>
+                <Container style={{ textAlign: 'left' }}>
                     <Row>
                         <Col xs={3} md={3}>
                             <ColorPicker
@@ -156,6 +156,7 @@ class Studio extends React.Component<Props, State> {
                     <Row>
                         <Col>
                             <Container style={{ padding: '0.5em' }}>
+                                <Form.Label>Shareable URL</Form.Label>
                                 <Form.Control
                                     value={this.buildShareableUrl()}
                                     readOnly

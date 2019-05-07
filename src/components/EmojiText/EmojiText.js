@@ -48,6 +48,7 @@ class EmojiText extends React.Component<Props, State> {
     render() {
         return (
             <Container style={{ padding: '0.5em' }}>
+                <Form.Label>Slack Text</Form.Label>
                 <Form.Control as="textarea" rows="16" value={this.toEmojiText(this.props.image)} readOnly />
             </Container>
         );
