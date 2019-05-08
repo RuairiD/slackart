@@ -1,8 +1,6 @@
 import React from 'react';
 
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 import ColorChoice from './ColorChoice';
 
@@ -31,23 +29,19 @@ class ColorPicker extends React.Component<Props, State> {
     render() {
         return (
             <Container>
-                <Row>
-                    <Col>
-                        {this.props.pallette.map(
-                            (colorData, i) => (
-                                <ColorChoice
-                                    key={i}
-                                    isSelected={i === this.state.selectedColor}
-                                    color={i}
-                                    displayColor={colorData.color}
-                                    emoji={colorData.emoji}
-                                    onClick={this.onChange}
-                                    onEmojiChange={this.props.onEmojiChange}
-                                />
-                            )
-                        )}
-                    </Col>
-                </Row>
+                {this.props.pallette.map(
+                    (colorData, i) => (
+                        <ColorChoice
+                            key={i}
+                            isSelected={i === this.state.selectedColor}
+                            color={i}
+                            displayColor={colorData.color}
+                            emoji={colorData.emoji}
+                            onClick={this.onChange}
+                            onEmojiChange={this.props.onEmojiChange}
+                        />
+                    )
+                )}
             </Container>
         );
     }

@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 import Settings from './Settings';
 import Canvas from '../Canvas/Canvas';
@@ -131,42 +132,47 @@ class Studio extends React.Component<Props, State> {
                 <Container style={{ textAlign: 'left' }}>
                     <Row>
                         <Col xs={3} md={3}>
-                            <ColorPicker
-                                pallette={this.state.pallette}
-                                onChange={this.updateBrushColor}
-                                onEmojiChange={this.updateColorEmoji}
-                            />
-                            <Settings
-                                rightPad={this.state.rightPad}
-                                showPixelGrid={this.state.showPixelGrid}
-                                toggleRightPad={this.toggleRightPad}
-                                toggleShowPixelGrid={this.toggleShowPixelGrid}
-                            />
+                            <Card className="island">
+                                <ColorPicker
+                                    pallette={this.state.pallette}
+                                    onChange={this.updateBrushColor}
+                                    onEmojiChange={this.updateColorEmoji}
+                                />
+                                <Settings
+                                    rightPad={this.state.rightPad}
+                                    showPixelGrid={this.state.showPixelGrid}
+                                    toggleRightPad={this.toggleRightPad}
+                                    toggleShowPixelGrid={this.toggleShowPixelGrid}
+                                />
+                            </Card>
                         </Col>
                         <Col>
-                            <Canvas
-                                initialImage={this.state.image}
-                                pallette={this.state.pallette}
-                                brushColor={this.state.brushColor}
-                                onChange={this.updateEmojiText}
-                                showPixelGrid={this.state.showPixelGrid}
-                            />
+                            <Card className="island">
+                                <Canvas
+                                    initialImage={this.state.image}
+                                    pallette={this.state.pallette}
+                                    brushColor={this.state.brushColor}
+                                    onChange={this.updateEmojiText}
+                                    showPixelGrid={this.state.showPixelGrid}
+                                />
+                            </Card>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <Container style={{ padding: '0.5em' }}>
+                            <Card className="island">
                                 <Form.Label>Shareable URL</Form.Label>
                                 <Form.Control
                                     value={this.buildShareableUrl()}
                                     readOnly
+                                    style={{ marginBottom: '0.5em' }}
                                 />
-                            </Container>
-                            <EmojiText
-                                pallette={this.state.pallette}
-                                image={this.state.image}
-                                rightPad={this.state.rightPad}
-                            />
+                                <EmojiText
+                                    pallette={this.state.pallette}
+                                    image={this.state.image}
+                                    rightPad={this.state.rightPad}
+                                />
+                            </Card>
                         </Col>
                     </Row>
                 </Container>

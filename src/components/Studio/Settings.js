@@ -14,11 +14,11 @@ type Props = {
 class Settings extends React.Component<Props> {
     render() {
         return (
-            <Container style={{ padding: '1em' }}>
-                <Row>
+            <Container>
+                <Row style={{ paddingLeft: '1em' }}>
                     <Form.Check type="checkbox" label="Right pad :empty: emojis." checked={this.props.rightPad} onChange={this.props.toggleRightPad} />
                 </Row>
-                <Row>
+                <Row style={{ paddingLeft: '1em' }}>
                     <Form.Check type="checkbox" label="Show pixel grid" checked={this.props.showPixelGrid} onChange={this.props.toggleShowPixelGrid} />
                 </Row>
             </Container>

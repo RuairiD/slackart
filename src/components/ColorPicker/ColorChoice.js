@@ -30,11 +30,11 @@ class ColorChoice extends React.Component<Props, State> {
     };
 
     render() {
-        let containerStyle = { padding: '0.25em' };
+        let containerStyle = { padding: '0.5em' };
         if (this.props.isSelected) {
             Object.assign(containerStyle, {
-                borderStyle: 'dotted',
-                borderColor: '#000000',
+                background: this.props.displayColor,
+                boxShadow: '0.25em 0.25em 0.25em #00000055',
             })
         }
         return (

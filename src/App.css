@@ -31,3 +31,12 @@
     transform: rotate(360deg);
   }
 }
+
+.island {
+  margin: 1em 0 1em 0;
+  padding: 1em;
+}
+
+.canvas-controls > * {
+  margin-right: 0.5em;
+}
