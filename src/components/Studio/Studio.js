@@ -65,6 +65,14 @@ const DEFAULT_PALLETTE = [
         color: '#E1C699',
         emoji: ':beige:',
     },
+    {
+        color: '#FFD700',
+        emoji: ':gold:',
+    },
+    {
+        color: '#000080',
+        emoji: ':navy_blue:',
+    },
 ];
 
 class Studio extends React.Component<Props, State> {
