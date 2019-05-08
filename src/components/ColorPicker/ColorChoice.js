@@ -5,10 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
+import getEmojiUrl from '../../helpers/getEmojiUrl';
+
 type Props = {
     isSelected: boolean,
     color: number,
-    displayColor: string,
     emoji: string,
     onClick: any,
     onEmojiChange: any,
@@ -31,12 +32,14 @@ class ColorChoice extends React.Component<Props, State> {
 
     render() {
         let containerStyle = { padding: '0.5em' };
+        let emojiUrl = getEmojiUrl(this.props.emoji);
         if (this.props.isSelected) {
             Object.assign(containerStyle, {
-                background: this.props.displayColor,
+                backgroundImage: 'url(' + emojiUrl + ')',
                 boxShadow: '0.25em 0.25em 0.25em #00000055',
             })
         }
+
         return (
             <Container style={containerStyle}>
                 <Row>
@@ -46,7 +49,8 @@ class ColorChoice extends React.Component<Props, State> {
                     <Col xs>
                         <div
                             style={{
-                                background: this.props.displayColor,
+                                backgroundImage: 'url(' + emojiUrl + ')',
+                                backgroundSize: SIZE + 'px ' + SIZE + 'px',
                                 borderStyle: 'solid',
                                 borderColor: '#000000',
                                 width: SIZE,

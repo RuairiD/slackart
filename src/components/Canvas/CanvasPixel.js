@@ -1,5 +1,7 @@
 import React from 'react';
 
+import getEmojiUrl from '../../helpers/getEmojiUrl';
+
 type Props = {
     x: number,
     y: number,
@@ -22,10 +24,19 @@ class CanvasPixel extends React.Component<Props, State> {
 
     render() {
         let pixelStyle = {
-            background: this.props.pallette[this.props.color].color,
             width: SIZE,
             height: SIZE,
         };
+
+        let emoji = this.props.pallette[this.props.color];
+        let emojiUrl = getEmojiUrl(emoji);
+
+        if (emojiUrl) {
+            Object.assign(pixelStyle, {
+                backgroundImage: 'url(' + emojiUrl + ')',
+                backgroundSize: SIZE + 'px ' + SIZE + 'px',
+            });
+        }
 
         if (this.props.showPixelGrid) {
             Object.assign(pixelStyle, {

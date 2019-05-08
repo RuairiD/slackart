@@ -30,13 +30,12 @@ class ColorPicker extends React.Component<Props, State> {
         return (
             <Container>
                 {this.props.pallette.map(
-                    (colorData, i) => (
+                    (emoji, i) => (
                         <ColorChoice
                             key={i}
                             isSelected={i === this.state.selectedColor}
                             color={i}
-                            displayColor={colorData.color}
-                            emoji={colorData.emoji}
+                            emoji={emoji}
                             onClick={this.onChange}
                             onEmojiChange={this.props.onEmojiChange}
                         />

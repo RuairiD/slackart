@@ -25,75 +25,46 @@ type State = {
 };
 
 const DEFAULT_PALLETTE = [
-    {
-        color: null,
-        emoji: ':empty:',
-    },
-    {
-        color: '#FFFFFF',
-        emoji: ':white:',
-    },
-    {
-        color: '#000000',
-        emoji: ':black:',
-    },
-    {
-        color: '#FF0000',
-        emoji: ':red:',
-    },
-    {
-        color: '#0000FF',
-        emoji: ':blue:',
-    },
-    {
-        color: '#00FFFF',
-        emoji: ':cyan:',
-    },
-    {
-        color: '#00DD00',
-        emoji: ':green:',
-    },
-    {
-        color: '#FFFF00',
-        emoji: ':yellow:',
-    },
-    {
-        color: '#FFA500',
-        emoji: ':orange:',
-    },
-    {
-        color: '#E1C699',
-        emoji: ':beige:',
-    },
-    {
-        color: '#FFD700',
-        emoji: ':gold:',
-    },
-    {
-        color: '#000080',
-        emoji: ':navy_blue:',
-    },
+    ':empty:',
+    ':white:',
+    ':black:',
+    ':red:',
+    ':blue:',
+    ':cyan:',
+    ':green:',
+    ':yellow:',
+    ':orange:',
+    ':beige:',
+    ':gold:',
+    ':navy_blue:',
 ];
 
 class Studio extends React.Component<Props, State> {
-    encodeImage = (image) => {
-        return Buffer.from(JSON.stringify(image)).toString('base64');
+    encodeImageData = (imageData) => {
+        return Buffer.from(JSON.stringify(imageData)).toString('base64');
     };
 
-    decodeImage = (encImage) => {
-        if (!encImage) {
-            return null;
+    decodeImageData = (encImageData) => {
+        if (!encImageData) {
+            return {
+                image: null,
+                pallette: null,
+            };
         }
-        return JSON.parse(Buffer.from(encImage, 'base64').toString('ascii'));
+        return JSON.parse(Buffer.from(encImageData, 'base64').toString('ascii'));
     };
 
-    state = {
-        image: this.decodeImage(this.props.savedEncImage),
-        pallette: DEFAULT_PALLETTE,
-        brushColor: 0,
-        rightPad: false,
-        showPixelGrid: true,
-    };
+    constructor(props) {
+        super(props);
+        const imageData = this.decodeImageData(this.props.savedEncImage);
+        this.state = {
+            image: imageData.image,
+            pallette: imageData.pallette || DEFAULT_PALLETTE,
+            brushColor: 0,
+            rightPad: false,
+            showPixelGrid: true,
+        }
+    }
 
     updateEmojiText = (image) => {
         this.setState({
@@ -109,7 +80,7 @@ class Studio extends React.Component<Props, State> {
 
     updateColorEmoji = (color, emoji) => {
         let pallette = this.state.pallette;
-        pallette[color].emoji = emoji;
+        pallette[color] = emoji;
         this.setState({
             pallette: pallette,
         });
@@ -128,7 +99,10 @@ class Studio extends React.Component<Props, State> {
     };
 
     buildShareableUrl = () => {
-        return window.location.origin + '/?image=' + this.encodeImage(this.state.image);
+        return window.location.origin + '/?image=' + this.encodeImageData({
+            image: this.state.image,
+            pallette: this.state.pallette,
+        });
     };
 
     render() {
