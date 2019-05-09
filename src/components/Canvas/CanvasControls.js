@@ -33,11 +33,6 @@ class CanvasControls extends React.Component<Props, State> {
 
     updateWidth = (event) => {
         let width = event.target.value;
-        if (width > MAX_WIDTH) {
-            width = MAX_WIDTH;
-        } else if (width < 1) {
-            width = 1;
-        }
         this.setState({
             width: width,
         });
@@ -45,18 +40,32 @@ class CanvasControls extends React.Component<Props, State> {
 
     updateHeight = (event) => {
         let height = event.target.value;
-        if (height > MAX_HEIGHT) {
-            height = MAX_HEIGHT;
-        } else if (height < 1) {
-            height = 1;
-        }
         this.setState({
             height: height,
         });
     };
 
     onResize = () => {
-        this.props.onResize(this.state.width, this.state.height);
+        let width = this.state.width;
+        let height = this.state.height;
+
+        if (width > MAX_WIDTH) {
+            width = MAX_WIDTH;
+        } else if (width < 1) {
+            width = 1;
+        }
+
+        if (height > MAX_HEIGHT) {
+            height = MAX_HEIGHT;
+        } else if (height < 1) {
+            height = 1;
+        }
+
+        this.setState({
+            width: width,
+            height: height,
+        });
+        this.props.onResize(width, height);
     };
 
     showClearCanvasModal = () => {

@@ -39,6 +39,8 @@ const DEFAULT_PALLETTE = [
     ':navy_blue:',
 ];
 
+const ROOT = 'https://people.yelpcorp.com/~ruairi/slackart';
+
 class Studio extends React.Component<Props, State> {
     encodeImageData = (imageData) => {
         return Buffer.from(JSON.stringify(imageData)).toString('base64');
@@ -99,7 +101,7 @@ class Studio extends React.Component<Props, State> {
     };
 
     buildShareableUrl = () => {
-        return window.location.origin + '/?image=' + this.encodeImageData({
+        return ROOT + '/?image=' + this.encodeImageData({
             image: this.state.image,
             pallette: this.state.pallette,
         });
