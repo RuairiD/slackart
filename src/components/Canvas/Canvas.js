@@ -19,9 +19,6 @@ type State = {
 };
 
 class Canvas extends React.Component<Props, State> {
-    state = {
-    }
-
     constructor(props, state) {
         super(props, state);
         this.state = {
