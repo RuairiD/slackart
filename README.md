@@ -1,5 +1,11 @@
 # Slackart
 
+Design it on Slackart, share it on Slack. But big.
+<p float="left">
+    <img src="https://i.imgur.com/4PxyYov.png" alt="Design it in Slackart..." width="300"/>
+    <img src="https://i.imgur.com/xXDWSXa.png" alt="...share it on Slack" width="300"/>
+</p>
+
 ## Features
 * 12+ colours.
 * Up to 32x32px images.
@@ -21,6 +27,8 @@ You'll need to replace `src/config/emojis.json` with the output of your Slack se
     }
 }
 ```
+
+The default pallette assumes the presence of simple solid colour emojis e.g. `:red:` maps to an emoji of a solid red square.
 
 ## Running & Building
 Slackart is just your average, happy-go-lucky React app. [Instructions are as standard.](https://facebook.github.io/create-react-app/docs/getting-started)
