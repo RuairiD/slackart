@@ -56,13 +56,17 @@ class Canvas extends React.Component<Props, State> {
     };
 
     clearImage = () => {
+        let emptyImage = this.buildEmptyImage(
+            this.state.image.length,
+            this.state.image[0].length
+        )
         this.setState({
             image: this.buildEmptyImage(
                 this.state.image.length,
                 this.state.image[0].length
             ),
         })
-        this.props.onChange(this.state.image);
+        this.props.onChange(emptyImage);
     };
 
     onPixelClick = (x, y) => {
@@ -72,7 +76,7 @@ class Canvas extends React.Component<Props, State> {
             this.setState({
                 image: image,
             });
-            this.props.onChange(this.state.image);
+            this.props.onChange(image);
         }
     };
 
@@ -89,10 +93,11 @@ class Canvas extends React.Component<Props, State> {
     };
 
     onResize = (width, height) => {
+        let resizedImage = this.buildImage(width, height);
         this.setState({
-            image: this.buildImage(width, height),
+            image: resizedImage,
         });
-        this.props.onChange(this.state.image);
+        this.props.onChange(resizedImage);
     };
 
     render() {
